@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
+import com.JobSearchService.Service.ValidateUserServiceImpl;
 import com.jobSearch.VO.UserVO;
 
 @Path("/ValidateLogonService")
@@ -17,14 +18,24 @@ public class ValidateLogonService {
 	
 	@Path("/validateUser")
 	@POST
-	@Consumes("application/x-www-form-urlencoded")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
  
-	public Response validateUser(MultivaluedMap<String, String> formParam) throws Exception {
-		System.out.println("Inside web service");
-		
-		return Response.ok().entity("success").build();
-		
+	public Response validateUser(UserVO userVO) throws Exception {
+		userVO = ValidateUserServiceImpl.validateUser(userVO);
+		return Response.ok().entity(userVO).build();
 	}
+	
+	
+	@Path("/createUser")
+	@POST
+	@Consumes(MediaType.APPLICATION_XML)
+	@Produces(MediaType.APPLICATION_XML)
+ 
+	public Response createUser(UserVO userVO) throws Exception {
+		userVO = ValidateUserServiceImpl.createUser(userVO);
+		return Response.ok().entity(userVO).build();
+	}
+	
 
 }

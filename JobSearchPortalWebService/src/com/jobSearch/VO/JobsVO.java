@@ -1,5 +1,6 @@
 package com.jobSearch.VO;
 
+
 public class JobsVO {
 	private int jobId;
 	private String company;
